@@ -1,0 +1,14 @@
+:root {
+    --primary-color: #31a2a6;
+    --secondary-color: #74aeb7;
+    --tertiary-color: rgba(33, 39, 43, 0.7);
+    --quaternary-color: #d7f9f7;
+    --text-color: #CDD5D3;
+    --background-color: #707070;
+    --background-image: url('../Assets/background.JPG');
+}
+body {
+    background-image: var(--background-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign In/Sign Up Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <img src="Assets/icon.png" alt="Icon" class="icon">
+        <template id="signInTemplate">
+            <div id="signInForm">
+                <h2>Sign In</h2>
+                <label for="signInUname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="signInUname" required>
+
+                <label for="signInPsw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="signInPsw" required>
+
+                <button type="button" onclick="signIn()">Sign In</button>
+                <p>Don't have an account? <a href="#" onclick="showSignUpForm()">Sign Up</a></p>
+            </div>
+        </template>
+
+        <template id="signUpTemplate">
+            <div id="signUpForm"">
+                <h2>Sign Up</h2>
+                <label for="signUpUname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="signUpUname" required>
+    
+                <label for="signUpPsw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="signUpPsw" required>
+    
+                <button type="button" onclick="signUp()">Sign Up</button>
+                <p>Already have an account? <a href="#" onclick="showSignInForm()">Sign In</a></p>
+            </div>
+        </template>
+        <div id="formContainer"/>
+    </div>
+
+    <div id="homeContainer">
+        <template id="homeTemplate">
+            <div id="home">
+                <h2>Welcome</h2>
+                <p>You are now signed in.</p>
+                <button type="button" onclick="signOut()">Sign Out</button>
+            </div>
+        </template>
+    </div>
+
+    <script src="../db/database.js"></script>
+    <script src="../common/EndPoint.js"></script>
+    <script src="../common/FNetwork.js"></script>
+    <script src="../common/FXMLHttpRequest.js"></script>
+    <script src="../server/server.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
