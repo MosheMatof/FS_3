@@ -29,7 +29,7 @@ class DB {
     }
 
     getGoalsReport(id) {
-        return this.goalsReports.find(report => report.id === id);
+        return this.goalsReports.find(report => report.date === id);
     }
 
     getGoalsReports(employeeId) {
@@ -40,14 +40,14 @@ class DB {
         localStorage.goalsReports = JSON.stringify(this.goalsReports);
     }
     putGoalsReport(id, report) {
-        const index = this.goalsReports.findIndex(report => report.id === id);
+        const index = this.goalsReports.findIndex(report => report.date === id);
         if (index !== -1) {
             this.goalsReports[index] = report;
             localStorage.goalsReports = JSON.stringify(this.goalsReports);
         }
     }
     deleteGoalsReport(id) {
-        const index = this.goalsReports.findIndex(report => report.id === id);
+        const index = this.goalsReports.findIndex(report => report.date === id);
         this.goalsReports.splice(index, 1);
         localStorage.goalsReports = JSON.stringify(this.goalsReports);
     }

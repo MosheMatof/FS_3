@@ -16,7 +16,7 @@ const server = new EndPoint('server', async (data) => {
                 data.responseText = 'access denied'
                 return
             } else if(resource === 'goalsReports'){
-                    loggedUser = JSON.parse(localStorage.getItem('loggedUser'));                    if(!loggedUser){
+                    loggedUser = JSON.parse(sessionStorage.getItem('loggedUser'));                    if(!loggedUser){
                     data.status = 401
                     data.responseText = 'access denied'
                     return
@@ -34,6 +34,9 @@ const server = new EndPoint('server', async (data) => {
                     data.status = 200
                     data.responseText = JSON.stringify(reports)
                 }
+            } else if(resource === 'signout'){
+                sessionStorage.removeItem('loggedUser')
+                data.status = 200
             }
         } else if(data.method === 'POST'){
             if(resource === 'signin'){
@@ -43,15 +46,22 @@ const server = new EndPoint('server', async (data) => {
                     data.status = 200
                     data.responseText = JSON.stringify(db.employees[index])
                     //set logged user in the local storage
-                    localStorage.setItem('loggedUser', data.responseText)
+                    sessionStorage.setItem('loggedUser', data.responseText)
                 } else {
                     data.status = 404
                 }
             }
             else if(resource === 'signup'){
                 const employee = JSON.parse(data.body)
-                db.postEmployee(employee)
-                data.status = 201
+                const index = db.employees.findIndex(e => e.name === employee.name)
+                if(index === -1){
+                    db.postEmployee(employee)
+                    data.status = 201
+                    sessionStorage.setItem('loggedUser', data.responseText)
+                } else {
+                    data.status = 409
+                    data.responseText = 'user name already exists'
+                }
             }
             else if(resource === 'goalsReports'){
                 const report = JSON.parse(data.body)

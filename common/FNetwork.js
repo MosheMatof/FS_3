@@ -17,13 +17,17 @@ class FNetwork {
                 for (let ep of this.endPoints) {
                     let epName = data.url.split('/')[0];
                     if(ep.name === epName){
-                        // waitTime = Math.random() * 2000;
-                        // start = new Date().getTime();
-                        // while (new Date().getTime() < start + waitTime);
-                        ep.onReceive(data);
+                        let waitTime = Math.random() * 2000;
                         if(data.async && data.onreadystatechange){
-                            data.onreadystatechange();
+                            setTimeout(() => {
+                                data.readyState = 4;
+                                data.onreadystatechange();
+                            }, waitTime);
+                        } else {
+                            let start = new Date().getTime();
+                            while (new Date().getTime() < start + waitTime);
                         }
+                        ep.onReceive(data);
                     }
                 }
             } catch (error) {
